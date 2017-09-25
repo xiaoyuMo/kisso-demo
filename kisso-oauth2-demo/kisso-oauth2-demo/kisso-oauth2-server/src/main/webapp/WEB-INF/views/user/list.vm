@@ -1,0 +1,40 @@
+<html>
+<head>
+#include("common/header.vm")
+<title>OAuth2 Server 用户列表</title>
+</head>
+<body>
+<div class="container">
+	<div class="header clearfix">
+	    <nav>
+	       <ul class="nav nav-pills pull-right">kisso-oauth2-server</ul>
+        </nav>
+        <h3 class="text-muted"><a href="/">OAuth2 Server 用户列表</a></h3>
+    </div>
+    #if($!{msg})
+    <div class="alert alert-danger" role="alert">${msg}</div>
+    #end
+    <h3><a href="/user/create">添加用户</a></h3>
+    <table class="table table-bordered table-hover table-condensed">
+        <thead>
+        <tr>
+            <th>用户名</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        	#foreach($user in $userList)
+            <tr>
+                <td>$!{user.username}</td>
+                <td>
+                    <a href="/user/$!{user.id}/update">修改</a>
+                    <a href="/user/$!{user.id}/delete">删除</a>
+                    <a href="/user/$!{user.id}/changePassword">改密</a>
+                </td>
+            </tr>
+            #end
+        </tbody>
+    </table>
+#include("common/footer.vm")
+</div>
+</html>

@@ -1,0 +1,23 @@
+<html>
+<head>
+#include("common/header.vm")
+<title>OAuth2 Server 添加应用</title>
+</head>
+<body>
+<div class="container">
+	<div class="header clearfix">
+	    <nav>
+	       <ul class="nav nav-pills pull-right">kisso-oauth2-server</ul>
+	    </nav>
+        <h3 class="text-muted"><a href="/client">OAuth2 Server 添加应用</a></h3>
+    </div>
+	<form id="client" class="form-inline" action="/client/create" method="post">
+		<div class="form-group">
+			<label for="clientName">应用名：</label>
+			<input id="clientName" name="clientName" type="text" />
+		</div>
+		<button type="submit" value="Submit">添加</button>
+	</form>
+#include("common/footer.vm")
+</div>
+</html>

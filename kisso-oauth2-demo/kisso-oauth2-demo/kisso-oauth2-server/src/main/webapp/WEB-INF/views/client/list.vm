@@ -1,0 +1,45 @@
+<html>
+<head>
+#include("common/header.vm")
+<title>OAuth2 Server 应用列表</title>
+</head>
+<body>
+<div class="container">
+	<div class="header clearfix">
+	    <nav>
+	       <ul class="nav nav-pills pull-right">kisso-oauth2-server</ul>
+	    </nav>
+        <h3 class="text-muted"><a href="/">OAuth2 Server 应用列表</a></h3>
+    </div>
+    #if($!{msg})
+    <div class="alert alert-danger" role="alert">${msg}</div>
+    #end
+    <div>
+        <h3><a href="/client/create">应用新增</a></h3>
+    </div>
+    <table class="table table-bordered table-hover table-condensed">
+        <thead>
+            <tr>
+                <th>客户端名</th>
+                <th>客户端ID</th>
+                <th>客户端安全KEY</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+	      	#foreach($client in $clientList)
+	        <tr>
+	             <td>${client.clientName}</td>
+	             <td>${client.clientId}</td>
+	             <td>${client.clientSecret}</td>
+	             <td>
+	                 <a href="/client/${client.id}/update">修改</a>
+	                 <a href="/client/${client.id}/delete">删除</a>
+	             </td>
+	         </tr>
+	        #end
+        </tbody>
+    </table>
+#include("common/footer.vm")
+</div>
+</html>

@@ -1,0 +1,27 @@
+<html>
+<head>
+#include("common/header.vm")
+<title>OAuth2 Server 修改用户 $!{user.username}</title>
+</head>
+<body>
+<div class="container">
+	<div class="header clearfix">
+	    <nav>
+	       <ul class="nav nav-pills pull-right">kisso-oauth2-server</ul>
+        </nav>
+        <h3 class="text-muted"><a href="/user">OAuth2 Server 用户列表 </a></h3>
+    </div>
+    <h3>修改用户 $!{user.username}</h3>
+ 	<form id="user" class="form-inline" action="/user/$!{user.id}/update" method="post">
+        <input id="id" name="id" type="hidden" value="$!{user.id}"/>
+        <input id="salt" name="salt" type="hidden" value="$!{user.salt}"/>
+        <input id="password" name="password" type="hidden" value="$!{user.password}"/>
+        <div class="form-group">
+            <label for="username">用户名：</label>
+            <input id="username" name="username" type="text" value="$!{user.username}"/>
+        </div>
+        <input type="submit" value="修改" class="btn btn-default">
+    </form>
+#include("common/footer.vm")
+</div>
+</html>

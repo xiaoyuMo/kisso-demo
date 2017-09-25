@@ -1,0 +1,89 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<title>Oauth2 Server 端流程</title>
+<link type="image/x-icon" rel="shortcut icon" href="/static/favicon.ico" />
+<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<style type="text/css">
+body{font-size: 18px;font-family: "Consolas";margin: 20px;}
+a{font-size: 20px;font-weight: bold;cursor: pointer;text-decoration: none;}
+</style>
+</head>
+<body>
+<div style="margin: 0 auto;margin-top: 18px;width: 100%;text-align: center;">
+	<img alt="kisso-oauth2" src="/static/images/kisso-oauth2.png">
+	<br>
+	<br>
+    <a href="/client">应用管理</a>
+    <a href="/user">用户管理</a>
+</div>
+<div style="margin: 0 auto;margin-top: 18px;width: 1000px;">
+<pre>
+<br>
+<a href="/static/images/oauth2.jpg" target="_banlk">oauth2 原理</a>
+<h3>
+1. 先注册应用
+</h3>
+http://localhost:8080/client
+
+会生成client_id和client_secret 这两个以后会用到
+
+client_id               3c65d9602a6a44daaa80e3609c4a2be6    <b>应用id</b>
+client_secret           28f190d727d645a890a36258c405afd1    <b>应用secret</b>
+<h3>
+2. 请求授权码
+</h3>
+http://localhost:8080/authorize?client_id=3c65d9602a6a44daaa80e3609c4a2be6&response_type=code&redirect_uri=http://baomidou.com
+
+默认！ 用户  admin 密码  123 
+
+参数说明
+
+client_id               <b>应用id</b>
+response_type           <b>返回授权码的标识</b>
+redirect_uri            <b>回调地址</b>
+
+上面的网站会打开oauth server的用户登录页面。用户输入正确的用户名和密码以POST方式提交后会重定向到用户所填的回调地址并在地址后携带授权码.
+
+请求成功后会返回如下的页面:
+
+http://baomidou.com?code=0810ea2a451736796cadfcc928e9a82f
+
+这里code=0810ea2a451736796cadfcc928e9a82f <b>即授权码</b>
+<h3>
+3. 换取 accessToken (POST操作)
+</h3>
+首先GET方式请求 
+http://localhost:8080/access
+会打开一个表单在该表单中填入必填项，具体表单参数详见说明部分
+
+表单将会以POST方式提交到http://localhost:8080/accessToken,最终返回accessToken
+
+需要以POST方式提交以下参数换取accessToken
+
+client_id       3c65d9602a6a44daaa80e3609c4a2be6            <b>应用id</b>
+client_secret   28f190d727d645a890a36258c405afd1            <b>应用secret</b>
+grant_type      authorization_code                          <b>用于传递授权码的参数名authorization_code</b>
+code            0810ea2a451736796cadfcc928e9a82f            <b>用户登录授权后的授权码</b>
+redirect_uri    http://baomidou.com                         <b>回调地址</b>
+
+最终返回如下数据
+
+{"expires_in":3600,"access_token":"8af96f8ce8609602c5bc73969e397eac"}
+<h3>
+4. 测试 accessToken
+</h3>
+http://localhost:8080/v1/openapi/userInfo?access_token=223ae05dfbb0794396fb60a0960c197e
+
+测试ok的话返回用户名信息,access_token=223ae05dfbb0794396fb60a0960c197e为上一步获取的access_token
+
+<b>注：其中的参数名不要随意更改，固定写法。</b>
+
+</pre>
+</div>
+<br>
+<div style="margin: 0 auto;margin-bottom: 18px;width: 100%;text-align: center;">
+<img alt="程序员日记" src="/static/images/qrcode.png">
+</div>
+</body>
+</html>
