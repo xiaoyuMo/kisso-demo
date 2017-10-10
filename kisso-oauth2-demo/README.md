@@ -25,13 +25,3 @@ Usage
 [kisso_SpringMvc 演示 demo](http://git.oschina.net/juapk/kisso_springmvc)
 
 [kisso_crossdomain 跨域演示 demo](http://git.oschina.net/juapk/kisso_crossdomain)
-
-捐赠 kisso
-====================
-
-![捐赠 kisso](http://git.oschina.net/uploads/images/2015/1222/211207_0acab44e_12260.png "支持一下kisso")
-
-
-关注我
-====================
-![程序员日记](http://git.oschina.net/uploads/images/2016/0121/093728_1bc1658f_12260.png "程序员日记")
